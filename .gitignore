@@ -41,6 +41,9 @@
 *.dep
 *.lnp
 
+#SublimeText
+*.clang_complete
+
 # Kernel Module Compile Results
 *.mod*
 *.cmd
