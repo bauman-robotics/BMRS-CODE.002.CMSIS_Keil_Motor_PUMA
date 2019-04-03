@@ -24,31 +24,24 @@
 *.x86_64
 *.hex
 
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
-
 # Keil
 *.scvd
 *.uvoptx
 *.crf
 *.htm
-*.uvguix
-*.uvoptx
 *.axf
 *.dep
 *.lnp
 
+# User-specific uVision files
+*.opt
+*.uvopt
+*.uvoptx
+*.uvgui
+*.uvgui.*
+*.uvguix.*
+
 #SublimeText
 *.clang_complete
 
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+
