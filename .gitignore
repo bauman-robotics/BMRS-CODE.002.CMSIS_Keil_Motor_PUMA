@@ -26,12 +26,13 @@
 
 # Keil
 *.scvd
-*.uvoptx
 *.crf
 *.htm
 *.axf
 *.dep
 *.lnp
+*.sct
+*.iex
 
 # User-specific uVision files
 *.opt
