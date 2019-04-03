@@ -102,17 +102,14 @@ int main(void)
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
 	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3);
-  Init_StatPosition();
-
-	
-	
+  Init_StartPosition();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
- 
+
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
