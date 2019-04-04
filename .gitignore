@@ -1,30 +1,10 @@
-# Prerequisites
-*.d
 
-# Object files
+*.d
 *.o
-*.ko
 *.obj
 *.elf
-
-# Linker output
-*.ilk
 *.map
-*.exp
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
 *.hex
-
-# Keil
 *.scvd
 *.crf
 *.htm
@@ -33,8 +13,6 @@
 *.lnp
 *.sct
 *.iex
-
-# User-specific uVision files
 *.opt
 *.uvopt
 *.uvoptx
@@ -42,7 +20,6 @@
 *.uvgui.*
 *.uvguix.*
 
-#SublimeText
 *.clang_complete
 
 
