@@ -8,7 +8,7 @@ float POT_GetAngle(void) {
 	HAL_ADC_PollForConversion(&hadc1, 100);
 	adc_angle_raw = HAL_ADC_GetValue(&hadc1);
 	HAL_ADC_Stop(&hadc1);
-	return  adc_angle_raw;
+	adc_angle = 0.1404122151606579 * adc_angle_raw;  // (360 * 100)/(4095 * 62.61)
 }
 
 void Rotation_Right(void){
@@ -26,10 +26,13 @@ void Rotation_Left(void) {
 void Init_StartPosition (void) {
 	static float angle;
 	angle = POT_GetAngle();
-	if (angle < 2048) Rotation_Right();
-	if (angle >= 2048) Rotation_Left();
+	if (angle < 288) Rotation_Right();
+	else {
+		Rotation_Left();
+		angle = 574.9880210828941 - angle;
+	}
 	while (angle != 0) {
-		TIM3->CCR3 = (uint16_t)(angle*0.2442002442002442);
+		TIM3->CCR3 = (uint16_t)(angle*3.478333333333333); // 1000/(574.9880210828941/2)
 		angle = POT_GetAngle();
 	}
 	turn_cnt = 0;
