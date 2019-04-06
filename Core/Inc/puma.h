@@ -7,8 +7,6 @@
 #include "tim.h"
 #include "gpio.h"
 
-uint32_t turn_cnt = 0;
-
 void Motor_Control(uint16_t mean);
 float POT_GetAngle(void);
 void Init_StartPosition(void);

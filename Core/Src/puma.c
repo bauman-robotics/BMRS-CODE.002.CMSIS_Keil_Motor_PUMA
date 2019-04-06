@@ -1,5 +1,6 @@
 #include "puma.h"
 
+uint32_t turn_cnt = 0;
 
 float POT_GetAngle(void) {
 	static uint16_t adc_angle_raw;
