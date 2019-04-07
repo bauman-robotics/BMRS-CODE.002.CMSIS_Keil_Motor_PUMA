@@ -59,7 +59,6 @@
 #define PWM_MOT_GPIO_Port GPIOB
 #define ENC_I_Pin GPIO_PIN_4
 #define ENC_I_GPIO_Port GPIOB
-#define ENC_I_EXTI_IRQn EXTI4_IRQn
 #define ENC_A_Pin GPIO_PIN_6
 #define ENC_A_GPIO_Port GPIOB
 #define ENC_B_Pin GPIO_PIN_7

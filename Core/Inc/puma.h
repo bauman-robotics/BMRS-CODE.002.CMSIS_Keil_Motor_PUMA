@@ -8,8 +8,9 @@
 #include "gpio.h"
 
 void Motor_Control(uint16_t mean);
-float POT_GetAngle(void);
 void Init_StartPosition(void);
+float POT_GetAngle(void);
+float ENC_GetVelocity(void);
 
 #endif /* __PUMA_H__ */
 
