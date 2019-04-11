@@ -52,7 +52,10 @@
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
-
+float velo = 0;
+float cur_angle = 0;
+float nec_angle = 260;
+float angle_error;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -110,7 +113,17 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+		velo = ENC_GetVelocity();
 		
+		cur_angle =	POT_GetAngle();	
+		if (nec_angle >= cur_angle) {
+			angle_error = nec_angle - cur_angle;
+			Rotation_Right();
+		}	else {
+			angle_error = cur_angle - nec_angle;
+			Rotation_Left();
+		}
+		Motor_Control(angle_error);
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
