@@ -17,15 +17,20 @@ float POT_GetAngle(void) {
 }
 
 void Rotation_Left(void){
+	if (!((IN_A_GPIO_Port->ODR & IN_A_Pin) && !(IN_B_GPIO_Port->ODR & IN_B_Pin))) {
 		TIM3->CCR3 = 0;		// Stop
 		HAL_GPIO_WritePin(IN_A_GPIO_Port, IN_A_Pin, GPIO_PIN_SET);
 		HAL_GPIO_WritePin(IN_B_GPIO_Port, IN_B_Pin, GPIO_PIN_RESET);
+	}
 }
+	
 
 void Rotation_Right(void) {
-	TIM3->CCR3 = 0;		// Stop
-	HAL_GPIO_WritePin(IN_A_GPIO_Port, IN_A_Pin, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(IN_B_GPIO_Port, IN_B_Pin, GPIO_PIN_SET);
+	if (!(!(IN_A_GPIO_Port->ODR & IN_A_Pin) && (IN_B_GPIO_Port->ODR & IN_B_Pin))) {
+		TIM3->CCR3 = 0;		// Stop
+		HAL_GPIO_WritePin(IN_A_GPIO_Port, IN_A_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(IN_B_GPIO_Port, IN_B_Pin, GPIO_PIN_SET);
+	}
 }
 
 void Init_StartPosition (void) {
