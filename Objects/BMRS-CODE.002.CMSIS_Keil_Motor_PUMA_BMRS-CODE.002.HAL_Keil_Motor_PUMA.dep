@@ -1,0 +1,46 @@
+Dependencies for Project 'BMRS-CODE.002.CMSIS_Keil_Motor_PUMA', Target 'BMRS-CODE.002.HAL_Keil_Motor_PUMA': (DO NOT MODIFY !)
+F (.\Code\Src\adc.c)(0x5CBF85DB)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\CMSIS\Inc -I .\Code\Inc-I.\RTE\_BMRS-CODE.002.HAL_Keil_Motor_PUMA-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DSTM32F10X_MD-o .\objects\adc.o --omf_browse .\objects\adc.crf --depend .\objects\adc.d)
+I (.\Code\Inc\adc.h)(0x5CBF84D7)
+I (.\CMSIS\Inc\stm32f1xx.h)(0x5CBEADAC)
+I (.\CMSIS\Inc\stm32f103x6.h)(0x5BBCAE34)
+I (.\CMSIS\Inc\core_cm3.h)(0x5BBCAE34)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F218E)
+I (.\CMSIS\Inc\core_cmInstr.h)(0x5BBCAE34)
+I (.\CMSIS\Inc\cmsis_armcc.h)(0x5BBCAE34)
+I (.\CMSIS\Inc\core_cmFunc.h)(0x5BBCAE34)
+I (.\CMSIS\Inc\system_stm32f1xx.h)(0x5BBCAE34)
+F (.\Code\Src\main.c)(0x5CBF85A6)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\CMSIS\Inc -I .\Code\Inc-I.\RTE\_BMRS-CODE.002.HAL_Keil_Motor_PUMA-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DSTM32F10X_MD-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (.\Code\Inc\main.h)(0x5CBEAEBD)
+I (.\CMSIS\Inc\stm32f1xx.h)(0x5CBEADAC)
+I (.\CMSIS\Inc\stm32f103x6.h)(0x5BBCAE34)
+I (.\CMSIS\Inc\core_cm3.h)(0x5BBCAE34)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F218E)
+I (.\CMSIS\Inc\core_cmInstr.h)(0x5BBCAE34)
+I (.\CMSIS\Inc\cmsis_armcc.h)(0x5BBCAE34)
+I (.\CMSIS\Inc\core_cmFunc.h)(0x5BBCAE34)
+I (.\CMSIS\Inc\system_stm32f1xx.h)(0x5BBCAE34)
+I (.\Code\Inc\rcc.h)(0x5CBF85A4)
+F (.\Code\Src\puma.c)(0x5CBEB731)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\CMSIS\Inc -I .\Code\Inc-I.\RTE\_BMRS-CODE.002.HAL_Keil_Motor_PUMA-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DSTM32F10X_MD-o .\objects\puma.o --omf_browse .\objects\puma.crf --depend .\objects\puma.d)
+I (.\Code\Inc\puma.h)(0x5CBF85DB)
+F (.\Code\Src\rcc.c)(0x5CBF85DB)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\CMSIS\Inc -I .\Code\Inc-I.\RTE\_BMRS-CODE.002.HAL_Keil_Motor_PUMA-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DSTM32F10X_MD-o .\objects\rcc.o --omf_browse .\objects\rcc.crf --depend .\objects\rcc.d)
+I (.\Code\Inc\rcc.h)(0x5CBF85A4)
+I (.\CMSIS\Inc\stm32f1xx.h)(0x5CBEADAC)
+I (.\CMSIS\Inc\stm32f103x6.h)(0x5BBCAE34)
+I (.\CMSIS\Inc\core_cm3.h)(0x5BBCAE34)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F218E)
+I (.\CMSIS\Inc\core_cmInstr.h)(0x5BBCAE34)
+I (.\CMSIS\Inc\cmsis_armcc.h)(0x5BBCAE34)
+I (.\CMSIS\Inc\core_cmFunc.h)(0x5BBCAE34)
+I (.\CMSIS\Inc\system_stm32f1xx.h)(0x5BBCAE34)
+F (.\Code\Src\tim.c)(0x5CBEB676)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\CMSIS\Inc -I .\Code\Inc-I.\RTE\_BMRS-CODE.002.HAL_Keil_Motor_PUMA-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DSTM32F10X_MD-o .\objects\tim.o --omf_browse .\objects\tim.crf --depend .\objects\tim.d)
+I (.\Code\Inc\tim.h)(0x5CBF85DB)
+F (.\CMSIS\Src\system_stm32f1xx.c)(0x5BBCAE34)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\CMSIS\Inc -I .\Code\Inc-I.\RTE\_BMRS-CODE.002.HAL_Keil_Motor_PUMA-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DSTM32F10X_MD-o .\objects\system_stm32f1xx.o --omf_browse .\objects\system_stm32f1xx.crf --depend .\objects\system_stm32f1xx.d)
+I (.\CMSIS\Inc\stm32f1xx.h)(0x5CBEADAC)
+I (.\CMSIS\Inc\stm32f103x6.h)(0x5BBCAE34)
+I (.\CMSIS\Inc\core_cm3.h)(0x5BBCAE34)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F218E)
+I (.\CMSIS\Inc\core_cmInstr.h)(0x5BBCAE34)
+I (.\CMSIS\Inc\cmsis_armcc.h)(0x5BBCAE34)
+I (.\CMSIS\Inc\core_cmFunc.h)(0x5BBCAE34)
+I (.\CMSIS\Inc\system_stm32f1xx.h)(0x5BBCAE34)
+F (.\Startup\startup_stm32f103xb.s)(0x5BBCAE34)(--cpu Cortex-M3 --pd "__EVAL SETA 1" -g --apcs=interwork -I.\RTE\_BMRS-CODE.002.HAL_Keil_Motor_PUMA-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 526" --pd "STM32F10X_MD SETA 1"--list .\listings\startup_stm32f103xb.lst --xref -o .\objects\startup_stm32f103xb.o --depend .\objects\startup_stm32f103xb.d)

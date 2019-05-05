@@ -3,5 +3,7 @@
 
 #include "stm32f1xx.h"
 #include "rcc.h"
+#include "tim.h"
+#include "adc.h"
 
 #endif // __MAIN_H__

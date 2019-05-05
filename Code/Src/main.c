@@ -1,9 +1,11 @@
 #include "main.h"
 
-void main(void ) {
-
+int main(void ) {
+    RCC_init();
+    TIM1_init();
+    TIM2_ENCODE_init();
+    ADC1_init();
     while (1) {
 
     }
 }
-

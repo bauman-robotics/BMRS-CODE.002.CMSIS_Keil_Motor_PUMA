@@ -8,3 +8,4 @@
 *.uvgui
 *.uvgui.*
 *.uvguix.*
+*.code-workspace
