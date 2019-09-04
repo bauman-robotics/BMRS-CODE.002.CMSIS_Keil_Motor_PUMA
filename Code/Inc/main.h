@@ -5,5 +5,6 @@
 #include "rcc.h"
 #include "tim.h"
 #include "adc.h"
+#include "puma.h"
 
 #endif // __MAIN_H__

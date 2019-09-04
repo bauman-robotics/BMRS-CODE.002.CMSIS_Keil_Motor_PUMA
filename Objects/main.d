@@ -9,3 +9,6 @@
 .\objects\main.o: .\CMSIS\Inc\core_cmFunc.h
 .\objects\main.o: .\CMSIS\Inc\system_stm32f1xx.h
 .\objects\main.o: .\Code\Inc\rcc.h
+.\objects\main.o: .\Code\Inc\tim.h
+.\objects\main.o: .\Code\Inc\adc.h
+.\objects\main.o: .\Code\Inc\puma.h

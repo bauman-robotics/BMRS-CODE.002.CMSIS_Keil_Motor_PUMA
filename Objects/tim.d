@@ -1,2 +1,10 @@
 .\objects\tim.o: Code\Src\tim.c
 .\objects\tim.o: .\Code\Inc\tim.h
+.\objects\tim.o: .\CMSIS\Inc\stm32f1xx.h
+.\objects\tim.o: .\CMSIS\Inc\stm32f103x6.h
+.\objects\tim.o: .\CMSIS\Inc\core_cm3.h
+.\objects\tim.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\tim.o: .\CMSIS\Inc\core_cmInstr.h
+.\objects\tim.o: .\CMSIS\Inc\cmsis_armcc.h
+.\objects\tim.o: .\CMSIS\Inc\core_cmFunc.h
+.\objects\tim.o: .\CMSIS\Inc\system_stm32f1xx.h

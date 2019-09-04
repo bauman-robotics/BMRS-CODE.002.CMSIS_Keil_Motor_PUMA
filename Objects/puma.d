@@ -1,2 +1,11 @@
 .\objects\puma.o: Code\Src\puma.c
 .\objects\puma.o: .\Code\Inc\puma.h
+.\objects\puma.o: .\CMSIS\Inc\stm32f1xx.h
+.\objects\puma.o: .\CMSIS\Inc\stm32f103x6.h
+.\objects\puma.o: .\CMSIS\Inc\core_cm3.h
+.\objects\puma.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\puma.o: .\CMSIS\Inc\core_cmInstr.h
+.\objects\puma.o: .\CMSIS\Inc\cmsis_armcc.h
+.\objects\puma.o: .\CMSIS\Inc\core_cmFunc.h
+.\objects\puma.o: .\CMSIS\Inc\system_stm32f1xx.h
+.\objects\puma.o: .\Code\Inc\tim.h
