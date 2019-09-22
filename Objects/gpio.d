@@ -1,0 +1,10 @@
+.\objects\gpio.o: Code\Src\gpio.c
+.\objects\gpio.o: .\Code\Inc\gpio.h
+.\objects\gpio.o: .\CMSIS\Inc\stm32f1xx.h
+.\objects\gpio.o: .\CMSIS\Inc\stm32f103x6.h
+.\objects\gpio.o: .\CMSIS\Inc\core_cm3.h
+.\objects\gpio.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\gpio.o: .\CMSIS\Inc\core_cmInstr.h
+.\objects\gpio.o: .\CMSIS\Inc\cmsis_armcc.h
+.\objects\gpio.o: .\CMSIS\Inc\core_cmFunc.h
+.\objects\gpio.o: .\CMSIS\Inc\system_stm32f1xx.h

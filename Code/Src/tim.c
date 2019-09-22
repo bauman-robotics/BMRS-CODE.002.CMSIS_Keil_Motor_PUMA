@@ -44,6 +44,9 @@ void TIM1_init(void) {
     TIM1->CCER |= ((TIM_CCER_CC1E | TIM_CCER_CC1NE) | (TIM_CCER_CC2E | TIM_CCER_CC2NE));    // On - OC1 and OC1N, OC2 and OC2N
     TIM1->EGR |= TIM_EGR_UG;    															// Reinitialize the counter and generates an update of the registers
     TIM1->CR1 |= TIM_CR1_CEN;   															// Enable counter
+
+    TIM1->CCR1 = (uint32_t)(PWM_period / 2);                                                // Channel A
+    TIM1->CCR2 = (uint32_t)(PWM_period / 2);                                                // Channel B
 }
 
 void TIM2_ENCODE_init(void) {
@@ -64,22 +67,26 @@ void TIM2_ENCODE_init(void) {
     TIM2->CCMR1 &= ~ (TIM_CCMR1_IC1F | TIM_CCMR1_IC2F);
     TIM2->CCER &= ~ (TIM_CCER_CC1E | TIM_CCER_CC2E);
     /******/
-    AFIO->MAPR |= AFIO_MAPR_SWJ_CFG_JTAGDISABLE;       // Release pin A15
-    AFIO->MAPR |= 0x01 << AFIO_MAPR_TIM2_REMAP_Pos;     // Remap to A15, B3
+    AFIO->MAPR |= AFIO_MAPR_SWJ_CFG_JTAGDISABLE;      											// Release pin A15
+    AFIO->MAPR |= 0x01 << AFIO_MAPR_TIM2_REMAP_Pos;     										// Remap to A15, B3
     /*** Config pins A15 & B3 | Floating input ***/
     GPIOA->CRH &= ~ GPIO_CRH_MODE15;
     GPIOA->CRH |= 0x01 << GPIO_CRH_CNF15_Pos;
     GPIOB->CRL &= ~ GPIO_CRL_MODE3;
     GPIOB->CRL |= 0x01 << GPIO_CRL_CNF3_Pos;
     /******/
-    TIM2->ARR |= 0x00;          // Auto-reload register
-    TIM2->PSC |= 0x00;          // Prescaler
-    TIM2->SMCR |= 0x03 << TIM_SMCR_SMS_Pos;             // Set Encoder mode 3
-    TIM2->CCER &= ~ (TIM_CCER_CC1P | TIM_CCER_CC2P);    // Set polarity
-    TIM2->CCMR1 &= ~ (TIM_CCMR1_IC1F | TIM_CCMR1_IC2F); // Set input filter
-    TIM2->CCMR1 |= ((0x01 << TIM_CCMR1_CC1S_Pos) | (0x01 << TIM_CCMR1_CC2S_Pos));   // Configurate input capture
-    TIM2->CCER |= (TIM_CCER_CC1E | TIM_CCER_CC2E);      // Capture enabled
-    TIM2->CR1 |= TIM_CR1_CEN;   // Enable counter
+    TIM2->ARR |= 0xFFFF;          																// Auto-reload register
+    TIM2->PSC |= 0x00;         																	// Prescaler
+    TIM2->SMCR |= 0x03 << TIM_SMCR_SMS_Pos;            											// Set Encoder mode 3
+    TIM2->CCER &= ~ (TIM_CCER_CC1P | TIM_CCER_CC2P);    										// Set polarity
+	# if INVERT_ENCODE_VECTOR
+	TIM2->CCER |= TIM_CCER_CC1P; 																// Set polarity on channel 1
+	TIM2->CCER &= ~ TIM_CCER_CC2P; 																// Set polarity on channel 2
+	#endif
+    TIM2->CCMR1 &= ~ (TIM_CCMR1_IC1F | TIM_CCMR1_IC2F); 										// Set input filter
+    TIM2->CCMR1 |= ((0x01 << TIM_CCMR1_CC1S_Pos) | (0x01 << TIM_CCMR1_CC2S_Pos));   			// Configurate input capture
+    TIM2->CCER |= (TIM_CCER_CC1E | TIM_CCER_CC2E);      										// Capture enabled
+    TIM2->CR1 |= TIM_CR1_CEN;   																// Enable counter
     TIM2->CNT = 0;
 }
 

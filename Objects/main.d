@@ -12,3 +12,4 @@
 .\objects\main.o: .\Code\Inc\tim.h
 .\objects\main.o: .\Code\Inc\adc.h
 .\objects\main.o: .\Code\Inc\puma.h
+.\objects\main.o: .\Code\Inc\gpio.h

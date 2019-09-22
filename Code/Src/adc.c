@@ -33,6 +33,38 @@ void ADC1_init(volatile uint16_t *mas_adr) {
 	ADC1->SQR3 &= ~ ADC_SQR3_SQ1;	// Channel 0 is setted first in convertion sequence
 	ADC1->SQR1 &= ~ ADC_SQR1_L;	// 1 convertion
 	#endif
+	#if 0
+	/* Potentiometer`s ADC */
+	RCC->APB2ENR |= RCC_APB2ENR_IOPBEN;							// Enable port B clock
+	RCC->CFGR &= ~ RCC_CFGR_ADCPRE;
+	RCC->CFGR |= RCC_CFGR_ADCPRE_DIV6;  // Set ADC Prescaler -> 12 MHz
+	RCC->APB2ENR |= RCC_APB2ENR_ADC2EN;	// Enable ADC clock
+	/***Clear all necessary bits***/
+	GPIOB->CRL &= ~GPIO_CRL_MODE1;
+	GPIOB->CRL &= ~GPIO_CRL_CNF1;
+	ADC2->CR2 &= ~ ADC_CR2_CONT;
+	ADC2->CR2 &= ~ ADC_CR2_ALIGN;
+	ADC2->SMPR2 &= ~ ADC_SMPR2_SMP1;
+	ADC2->CR2 &= ~ ADC_CR2_EXTSEL;
+	ADC2->SQR3 &= ~ ADC_SQR3_SQ1;
+	ADC2->SQR1 &= ~ ADC_SQR1_L;
+	/*****/
+	GPIOB->CRL |= 0x00 << GPIO_CRL_MODE1_Pos;					// Input mode
+	GPIOB->CRL |= 0x00 << GPIO_CRL_CNF1_Pos;					// Analog
+	
+	ADC2->CR2 |= ADC_CR2_CAL;									// Start calibration
+	while (!(ADC2->CR2 & ADC_CR2_CAL));							// Wait end of calibration
+	
+	ADC2->CR2 |= ADC_CR2_ADON;	// Enable ADC and start conversion
+	ADC2->CR2 |= ADC_CR2_CONT; // Set one convertion mode
+	ADC2->CR2 &= ~ ADC_CR2_ALIGN;	// Right alignment
+	ADC2->SMPR2 &= ~ ADC_SMPR2_SMP0;	// Set 1.5 cycle
+	ADC2->CR2 |= 0x07 << ADC_CR2_EXTSEL_Pos;	// Set SWSTART trigger
+	ADC2->CR2 |= ADC_CR2_EXTTRIG;	// Enable external trigger
+	ADC2->SQR3 |= (0x09 << ADC_SQR3_SQ1_Pos);	// Channel 0 is setted first in convertion sequence
+	ADC2->SQR1 &= ~ ADC_SQR1_L;	// 1 convertion
+	#endif
+	#if 1
 	/* Potentiometer`s and Current`s ADC */
 	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;							// Enable port A clock
 	RCC->APB2ENR |= RCC_APB2ENR_IOPBEN;							// Enable port B clock
@@ -44,7 +76,7 @@ void ADC1_init(volatile uint16_t *mas_adr) {
 	GPIOA->CRL &= ~GPIO_CRL_CNF0;
 	ADC1->CR2 &= ~ ADC_CR2_CONT;
 	ADC1->CR2 &= ~ ADC_CR2_ALIGN;
-	ADC1->SMPR2 &= ~ (ADC_SMPR2_SMP0 |ADC_SMPR2_SMP0);
+	ADC1->SMPR2 &= ~ (ADC_SMPR2_SMP0 |ADC_SMPR2_SMP9);
 	ADC1->CR2 &= ~ ADC_CR2_EXTSEL;
 	ADC1->SQR3 &= ~ ADC_SQR3_SQ1;
 	ADC1->SQR3 &= ~ ADC_SQR3_SQ2;
@@ -58,21 +90,22 @@ void ADC1_init(volatile uint16_t *mas_adr) {
 	GPIOB->CRL |= 0x00 << GPIO_CRL_MODE1_Pos;					// Input mode
 	GPIOB->CRL |= 0x00 << GPIO_CRL_CNF1_Pos;					// Analog
 
+	ADC1->CR2 |= ADC_CR2_ADON;									// Enable ADC and start conversion	
 	ADC1->CR2 |= ADC_CR2_CAL;									// Start calibration
 	while (!(ADC1->CR2 & ADC_CR2_CAL));							// Wait end of calibration
-  
-	ADC1->CR2 |= ADC_CR2_ADON;									// Enable ADC and start conversion
-	ADC1->CR2 &= ~ ADC_CR2_CONT; 								// Set one convertion mode
+
+	ADC1->CR1 |= ADC_CR1_SCAN; 									// Enable SCAN mode
+	ADC1->CR2 &= ~ ADC_CR2_CONT; 									// Set continuous mode
 	ADC1->CR2 &= ~ ADC_CR2_ALIGN;								// Right alignment
-	ADC1->SMPR2 &= ~ (ADC_SMPR2_SMP0 | ADC_SMPR2_SMP1);			// Set 1.5 cycle on channel 0 and 1
+	ADC1->SMPR2 |= (0x03 << ADC_SMPR2_SMP0_Pos);				// Set 1.5 cycle on channel 0 and 9
+	ADC1->SMPR2 |= (0x03 << ADC_SMPR2_SMP9_Pos);				// Set 1.5 cycle on channel 0 and 9
 	ADC1->CR2 |= 0x07 << ADC_CR2_EXTSEL_Pos;					// Set SWSTART trigger
 	ADC1->CR2 |= ADC_CR2_EXTTRIG;								// Enable external trigger
-	ADC1->SQR3 &= ~ ADC_SQR3_SQ1;								// Channel 0 is setted first in convertion sequence
-	ADC1->SQR3 |= (0x01 << ADC_SQR3_SQ2_Pos);					// Channel 1 is setted second in convertion sequence
+	ADC1->SQR3 &= ~ ADC_SQR3_SQ2;								// Channel 0 is setted first in convertion sequence
+	ADC1->SQR3 |= (0x09 << ADC_SQR3_SQ1_Pos);					// Channel 9 is setted second in convertion sequence
 	ADC1->SQR1 |= (0x01 << ADC_SQR1_L_Pos);						// 2 convertion
 	
-	ADC1->CR1 |= ADC_CR1_SCAN; 									// Enable SCAN mode
-	ADC1->CR2 |= ADC_CR2_DMA;									// Enable DMA		
+	ADC1->CR2 |= ADC_CR2_DMA;									// Enable DMA	
 	/**** DMA ****/
 	RCC->AHBENR |= RCC_AHBENR_DMA1EN;							// Enable DMA1
 	/***Clear all necessary bits***/		
@@ -92,5 +125,9 @@ void ADC1_init(volatile uint16_t *mas_adr) {
 	DMA1_Channel1->CCR |= (0x01 << DMA_CCR_PSIZE_Pos);			// 16-bits
 	DMA1_Channel1->CCR |= (0x01 << DMA_CCR_MSIZE_Pos);			// 16-bits
 	DMA1_Channel1->CCR |= DMA_CCR_EN;							// Enable DMA1 Channel_1
+	
+	
+	ADC1->CR2 |= ADC_CR2_SWSTART;
+	#endif
 }
 

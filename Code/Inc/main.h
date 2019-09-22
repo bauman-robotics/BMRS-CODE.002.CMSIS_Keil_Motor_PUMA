@@ -6,5 +6,6 @@
 #include "tim.h"
 #include "adc.h"
 #include "puma.h"
+#include "gpio.h"
 
 #endif // __MAIN_H__
