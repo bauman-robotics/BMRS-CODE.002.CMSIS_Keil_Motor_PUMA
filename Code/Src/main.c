@@ -9,23 +9,27 @@ int w = 0;
 int nes_val = 0;
 int err = 0;
 
-
 int main(void ) {	
     RCC_init();
 	GPIO_init();
     TIM1_init();
     TIM2_ENCODE_init();
+	TIM3_init();
 //    ADC1_init(adc_val);
 	
 	BRAKE_OFF;
     while (1) {
-#if TEST1
-		err = (uint16_t)(TIM2->CNT) - nes_val;
-		PI_custom(err);
-#endif
 #if TEST0
-		TIM1->CCR1 = 1000 + w;
-		TIM1->CCR2 = 1000 - w;
+		TIM1->CCR1 = HALF_PREIOD - w;
+		TIM1->CCR2 = HALF_PREIOD + w;
 #endif
     }
+}
+
+void TIM3_IRQHandler(void) {
+	TIM3->SR &= ~ TIM_SR_UIF;
+	#if TEST1
+		err = (uint16_t)(TIM2->CNT) - nes_val;
+		PI_custom(err);
+	#endif
 }

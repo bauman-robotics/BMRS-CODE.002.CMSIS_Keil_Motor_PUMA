@@ -13,6 +13,6 @@ typedef struct {
 
 
 void PI_custom (int err);
-void Func_2 (volatile uint16_t *mass, pos_cycl *cur_pos_cycl);
+
 
 #endif // __PUMA_H__

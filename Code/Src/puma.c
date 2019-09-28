@@ -1,32 +1,45 @@
 #include "puma.h"
 
-extern const uint16_t PWM_period;
+
+#define BIG_MOTOR 		1
+#define SMALL_MOTOR		0
 
 int val = 0;
+int err_i = 0;
+#if BIG_MOTOR
 float K_p = 0;
 float K_i = 0;
-uint32_t err_i = 0;
+#endif
+#if SMALL_MOTOR
+float K_p = 0;
+float K_i = 0;
+#endif
 
 void PI_custom (int err) {
-
+	if (err > 32768) {
+		err = 32768 - err;
+	}
+	if (err < -32768) {
+		err = 65535 + err;
+	}
+	
 	err_i += err;
+	
 	if (err_i > 6000) {
 		err_i = 6000;
     }
 	if (err_i < -6000) {
 		err_i = -6000;
 	}
-	val = K_p * err + K_i * err_i;
-	if (val > 950) {
-		val = 950;
-    }
-	if (val < -950) {
-		val = -950;
-	}
-	TIM1->CCR1 = (uint32_t)(PWM_period/2 + val);
-    TIM1->CCR2 = (uint32_t)(PWM_period/2 - val);
-}
-
-void Func_2 (volatile uint16_t *mass, pos_cycl *cur_pos_cycl) {
 	
+	val = K_p * err + K_i * err_i * 0.001;
+	
+	if (val > HALF_PREIOD) {
+		val = HALF_PREIOD;
+    }
+	if (val < -HALF_PREIOD) {
+		val = -HALF_PREIOD;
+	}
+	TIM1->CCR1 = (uint32_t)(HALF_PREIOD - val);
+    TIM1->CCR2 = (uint32_t)(HALF_PREIOD + val);
 }

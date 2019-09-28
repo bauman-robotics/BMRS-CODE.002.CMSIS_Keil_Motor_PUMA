@@ -1,7 +1,5 @@
 #include "tim.h"
 
-const uint16_t PWM_period = 2000;
-
 void TIM1_init(void) {
     /* Complementary outputs */ 
     RCC->APB2ENR |= RCC_APB2ENR_TIM1EN;
@@ -19,17 +17,17 @@ void TIM1_init(void) {
     TIM1->CR1 &= ~ (TIM_CR1_CMS | TIM_CR1_DIR | TIM_CR1_CEN);
     TIM1->BDTR &= ~ TIM_BDTR_DTG;
     /******/
-    AFIO->MAPR &= ~ AFIO_MAPR_TIM1_REMAP;   // No remap
+    AFIO->MAPR &= ~ AFIO_MAPR_TIM1_REMAP;                                                   // No remap
     /*** Config pins A8, A9 & B13, B14 | Alternate function output Push-pull, max speed ***/
     GPIOA->CRH |= ((0x03 << GPIO_CRH_MODE8_Pos) | (0x03 << GPIO_CRH_MODE9_Pos));    
     GPIOA->CRH |= ((0x02 << GPIO_CRH_CNF8_Pos) | (0x02 << GPIO_CRH_CNF9_Pos));      
     GPIOB->CRH |= ((0x03 << GPIO_CRH_MODE13_Pos) | (0x03 << GPIO_CRH_MODE14_Pos));  
     GPIOB->CRH |= ((0x02 << GPIO_CRH_CNF13_Pos) | (0x02 << GPIO_CRH_CNF14_Pos));      
     /******/
-    TIM1->ARR |= PWM_period;    // Auto-reload register
-    TIM1->CCR1 |= 0x00;         // Capture/compare register 1 
-    TIM1->CCR2 |= 0x00;         // Capture/compare register 2
-    TIM1->PSC |= 0x01;          // Prescaler  
+    TIM1->ARR |= PWM_PERIOD;                                                                // Auto-reload register
+    TIM1->CCR1 |= 0x00;                                                                     // Capture/compare register 1 
+    TIM1->CCR2 |= 0x00;                                                                     // Capture/compare register 2
+    TIM1->PSC |= 0x01;                                                                      // Prescaler  
 
     TIM1->CCMR1 |= ((0x06 << TIM_CCMR1_OC1M_Pos) | (0x06 << TIM_CCMR1_OC2M_Pos));           // Set PWM mode 1 on Channel 1, 2
     TIM1->CCMR1 |= (TIM_CCMR1_OC1PE | TIM_CCMR1_OC2PE);                                     // Enable preload register on TIM1_CCR1, TIM1_CCR2
@@ -45,8 +43,8 @@ void TIM1_init(void) {
     TIM1->EGR |= TIM_EGR_UG;    															// Reinitialize the counter and generates an update of the registers
     TIM1->CR1 |= TIM_CR1_CEN;   															// Enable counter
 
-    TIM1->CCR1 = (uint32_t)(PWM_period / 2);                                                // Channel A
-    TIM1->CCR2 = (uint32_t)(PWM_period / 2);                                                // Channel B
+    TIM1->CCR1 = (uint32_t)(PWM_PERIOD / 2);                                                // Channel A
+    TIM1->CCR2 = (uint32_t)(PWM_PERIOD / 2);                                                // Channel B
 }
 
 void TIM2_ENCODE_init(void) {
@@ -76,10 +74,10 @@ void TIM2_ENCODE_init(void) {
     GPIOB->CRL |= 0x01 << GPIO_CRL_CNF3_Pos;
     /******/
     TIM2->ARR |= 0xFFFF;          																// Auto-reload register
-    TIM2->PSC |= 0x00;         																	// Prescaler
+    TIM2->PSC |= 0x00;       /* Don`t use */  																	// Prescaler
     TIM2->SMCR |= 0x03 << TIM_SMCR_SMS_Pos;            											// Set Encoder mode 3
     TIM2->CCER &= ~ (TIM_CCER_CC1P | TIM_CCER_CC2P);    										// Set polarity
-	# if INVERT_ENCODE_VECTOR
+	#ifdef INVERT_ENCODE_VECTOR
 	TIM2->CCER |= TIM_CCER_CC1P; 																// Set polarity on channel 1
 	TIM2->CCER &= ~ TIM_CCER_CC2P; 																// Set polarity on channel 2
 	#endif
@@ -90,4 +88,21 @@ void TIM2_ENCODE_init(void) {
     TIM2->CNT = 0;
 }
 
+void TIM3_init(void) {
+    /* Timer mode, 1ms*/
+    RCC->APB1ENR |= RCC_APB1ENR_TIM3EN;
+    /*** Clear all necessary bits ***/
+    TIM3->ARR &= ~ TIM_ARR_ARR;          													
+    TIM3->PSC &= ~ TIM_PSC_PSC; 
+    TIM3->CR1 &= ~ TIM_CR1_CEN;
+    /******/
+    TIM3->ARR |= 0x3E7;          															// Auto-reload register, 1000
+    TIM3->PSC |= 0x47;                                                                      // Prescaler, 72
+    TIM3->DIER |= TIM_DIER_UIE;
+    TIM3->CR1 |= TIM_CR1_CEN;                                                               // Enable counter
 
+    NVIC_EnableIRQ(TIM3_IRQn);
+}
+
+__weak void TIM3_IRQHandler(void) {
+}
